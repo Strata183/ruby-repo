@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_22_003617) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_22_004435) do
   create_table "articles", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -36,12 +36,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_22_003617) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "category_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.boolean "published"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
   end
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "posts", "categories"
 end
